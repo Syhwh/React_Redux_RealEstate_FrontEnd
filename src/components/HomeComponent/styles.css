@@ -1,0 +1,27 @@
+.home {
+  background-image: url('../../assets/images/nueva-york.jpg');
+  background-repeat: no-repeat, repeat;
+  
+ /* justify-content: center;
+  align-content: center;
+  padding: 0 */
+}
+/* 
+.header-text{
+  text-align: center;
+  display: block;
+}
+h1 {
+  color: #fff;
+  line-height: 1.2;
+  text-transform: capitalize;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+.searchComponent {
+position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+} */

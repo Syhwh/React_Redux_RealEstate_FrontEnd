@@ -1,0 +1,265 @@
+import React, { useContext, useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { createProperty } from '../../redux/actions/propertyActions';
+import Dropzone from 'react-dropzone-uploader'
+import 'react-dropzone-uploader/dist/styles.css'
+import { Ammenities } from './ammenities';
+import { Form, Field, ErrorMessage, Formik } from 'formik';
+import * as Yup from 'yup';
+import Geocode from 'react-geocode';
+import ApiRE from '../../utils/ApiConfiguration';
+Geocode.setApiKey(process.env.REACT_APP_API_MAPS);
+
+const propertySchema = Yup.object().shape({
+  propertyTitle: Yup.string().required('This Field is required'),
+  propertyDescription: Yup.string().required('This Field is required'),
+  propertyPrice: Yup.string().required('This Field is required'),
+  neighborhood: Yup.string().required('This Field is required'),
+  country: Yup.string().required('This Field is required'),
+  state: Yup.string().required('This Field is required'),
+  city: Yup.string().required('This Field is required'),
+  zipCode: Yup.string().required('This Field is required'),
+  address: Yup.string().required('This Field is required'),
+  propertyType: Yup.string().min(4, 'This Field is required').required('This Field is required'),
+  propertyStatus: Yup.string().min(4, 'This Field is required').required('This Field is required'),
+  area: Yup.string().required('This Field is required'),
+  rooms: Yup.string().required('This Field is required'),
+  bedrooms: Yup.string().required('This Field is required'),
+  bathrooms: Yup.string().required('This Field is required'),
+  garages: Yup.string().required('This Field is required'),
+});
+
+
+function CreatePropertyForm({ error, createProperty }) {
+  const history = useHistory();
+  const [images, setImages] = useState([]);
+  // called every time a file's `status` changes
+  const handleChangeStatus = ({ meta, file }, status, files) => {
+    setImages(files);
+
+  }
+
+
+
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    Geocode.fromAddress(values.address).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+
+
+    const gallery = new FormData()
+    images.forEach(({ file }) => { gallery.append('image', file, file.name); })
+
+    // const token = localStorage.getItem('token')
+    // ApiRE.post(`/gallery`, gallery, {
+    //   headers: {
+    //     authorization: token,
+    //     'Content-Type': 'multipart/form-data'
+    //   }
+    // }).then(({ data }) => {
+
+
+
+    //   console.log('data en then')
+    //   console.log(data)
+    //   // const { public_id, url } = data.propertyImage;
+    //   // values.image = {
+    //   //   public_id, url
+    //   // }
+    //   // editUser(user, values)
+    //   resetForm()
+    //   setSubmitting(false)
+    // })
+    //   .catch((error) => {
+    //     console.log('error')
+    //   })
+
+    /*
+    
+    
+        
+            console.log(values);
+            //  createProperty(values);
+            resetForm();
+            setSubmitting(false);
+            history.push('/details')
+         
+    */
+
+  }
+  return (
+    <Formik
+      initialValues={{
+        propertyTitle: '',
+        propertyDescription: '',
+        propertyPrice: '',
+        neighborhood: '',
+        country: '',
+        state: '',
+        city: '',
+        zipCode: '',
+        address: '',
+        propertyType: '',
+        propertyStatus: '',
+        area: '',
+        rooms: '',
+        bedrooms: '',
+        bathrooms: '',
+        garages: '',
+        ammenities: [
+          { label: 'Air Conditioned', value: false },
+          { label: 'Basketball Court', value: false },
+          { label: 'Balcony', value: false },
+          { label: 'Beach ', value: false },
+          { label: 'Coffee Pot', value: false },
+          { label: 'Gym ', value: false },
+          { label: 'Garage', value: false },
+          { label: 'Heating ', value: false },
+          { label: 'Internet ', value: false },
+          { label: 'Laundry ', value: false },
+          { label: 'Microwave ', value: false },
+          { label: 'Roof terrace', value: false },
+          { label: 'Smoking Allowed', value: false },
+          { label: 'Swimming Pool', value: false },
+          { label: 'Terrace', value: false },
+          { label: 'Wheelchair Friendly', value: false }],
+        gallery: []
+      }}
+      validationSchema={propertySchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting, values, setFieldValue }) => {
+        return (
+          <Form  >
+            <div><h1>Listing a New Property</h1>
+            <div className='col-md-6'>
+              <div className='form-group'>
+                <label htmlFor='propertyTitle' >Property Title</label>
+                <Field name='propertyTitle' placeholder='Property Title'  className='form-control filter-input' />
+                <ErrorMessage name='propertyTitle' />
+              </div>
+            </div>
+              <div className='form-group'>
+                <label htmlFor='propertyDescription' >Description</label>
+                <Field component='textarea' rows='3' name='propertyDescription' placeholder='property Description Title' />
+                <ErrorMessage name='propertyDescription' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='propertyPrice' >Price $</label>
+                <Field name='propertyPrice' placeholder='Price' />
+                <ErrorMessage name='propertyPrice' />
+              </div>
+
+              <h3>Location</h3>
+              <div className='form-group'>
+                <label htmlFor='neighborhood' >Neighborhood</label>
+                <Field name='neighborhood' placeholder='Neighborhood' />
+                <ErrorMessage name='neighborhood' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='country' >Country</label>
+                <Field name='country' placeholder='country' />
+                <ErrorMessage name='country' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='state' >State</label>
+                <Field name='state' placeholder='state Title' />
+                <ErrorMessage name='state' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='city' >City</label>
+                <Field name='city' placeholder='city' />
+                <ErrorMessage name='city' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='zipCode' >Zip Code</label>
+                <Field name='zipCode' placeholder='Zip Code' />
+                <ErrorMessage name='zipCode' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='address' >Address</label>
+                <Field name='address' placeholder='Address' />
+                <ErrorMessage name='address' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='propertyType' >Property type</label>
+                <Field component='select' name='propertyType'>
+                  <option value="0" >Select </option>
+                  <option value="Apartment">Apartment </option>
+                  <option value="flat">Flat </option>
+                  <option value="House">House </option>
+                </Field>
+                <ErrorMessage name='propertyType' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='propertyStatus' >Property Status</label>
+                <Field component='select' name='propertyStatus'>
+                  <option value="0">Select </option>
+                  <option value="rent">For rent </option>
+                  <option value="sale">For sale </option>
+                </Field>
+                <ErrorMessage name='propertyStatus' />
+              </div>
+            </div>
+            <div><h1>Property Details</h1>
+              <div className='form-group'>
+                <label htmlFor='area' >area</label>
+                <Field name='area' placeholder='m2' />
+                <ErrorMessage name='area' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='rooms' >rooms</label>
+                <Field name='rooms' placeholder='Number of rooms' />
+                <ErrorMessage name='rooms' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='bedrooms' >bedrooms</label>
+                <Field name='bedrooms' placeholder='Number of bedrooms' />
+                <ErrorMessage name='bedrooms' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='bathrooms' >bathrooms</label>
+                <Field name='bathrooms' placeholder='Number of bathrooms' />
+                <ErrorMessage name='bathrooms' />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='garages' >garages</label>
+                <Field name='garages' placeholder='Number of garages' />
+                <ErrorMessage name='garages' />
+              </div>
+              <div><h2>Ammenities</h2>
+              </div>
+              <Ammenities
+                ammenities={values.ammenities}
+                setFieldValue={setFieldValue} />
+            </div>
+            <div>
+              <h1 className="text-center">Drag and Drop Pictures</h1>
+              <Dropzone
+                onChangeStatus={handleChangeStatus}
+
+                accept="image/*" />
+            </div>
+            <button type='submit' disabled={isSubmitting}> Create Property </button>
+          </Form>
+        );
+      }}
+    </Formik>
+  );
+}
+const mapStateToProps = (store) => {
+  return {
+    error: store.user.error
+  }
+}
+const mapDispatchToProps = { createProperty }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePropertyForm)

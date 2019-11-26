@@ -1,0 +1,171 @@
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { signUpUser } from '../../redux/actions/userActions'
+import { Form, Field, withFormik, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+
+const SignUpFormComponent = ({
+  isSubmitting,
+
+}) => (
+    <Form>
+      <div className='formInput'>
+        <label>
+          Given Name
+          <Field name='userGivenName' placeholder='Given Name' />
+        </label>
+        <ErrorMessage name='userGivenName' />
+      </div>
+      <div className='formInput'>
+        <label>
+          Family Name
+  <Field name='userFamilyName' placeholder='Family Name ' />
+        </label>
+      </div>
+      <div className='formInput'>
+        <label>
+          Email
+  <Field type='email' name='userEmail' placeholder='Email' />
+        </label>
+      </div>
+      <div className='formInput'>
+        <label>
+          Password
+  <Field type='password' name='userPassword' placeholder='Password' />
+        </label>
+        <ErrorMessage name='userPassword' />
+      </div>
+      <div className='formInput'>
+        <label>
+          Confirm Password
+          <Field type='password' name='userPasswordConfirm' placeholder='Repeat your password' />
+        </label>
+        <ErrorMessage name='userPasswordConfirm' />
+      </div>
+      <div className='formInput'>
+        <label>
+          About Me
+          <Field component='textarea' rows='3' name='userDescription' placeholder='Write something about yourself' />
+        </label>
+      </div>
+      <div className='formInput'>
+        <label htmlFor='userRol'>
+          Select your Rol
+          <Field component='select' name='userRol'>
+            <option value="independet">Independent </option>
+            <option value="independet">Agent </option>
+          </Field>
+        </label>
+      </div>
+      <div className='formInput'>
+        <label>
+          Select your agency
+  <Field component='select' name='userCompany'>
+            <option value="noCompany">No Company </option>
+          </Field>
+        </label>
+      </div>
+      <div className='ContactInfo'>
+        <div className='formInput'>
+          <label>
+            Phone office
+            <Field name='officePhone' placeholder='xxx-xxxxx-xxx' />
+          </label>
+        </div>
+        <div className='formInput'>
+          <label>
+            Mobile office
+             <Field name='mobilePhone' placeholder='xxx-xxxxx-xxx' />
+          </label>
+        </div>
+        <div className='formInput'>
+          <label>
+            Skype Id
+            <Field name='skypeId' placeholder='Sype User' />
+          </label>
+        </div>
+      </div>
+      <div className='socialMedia' >
+        <div className='formInput'>
+          <label>
+            Facebook
+            <Field name='facebookURL' placeholder='Facebook URL' />
+          </label>
+        </div>
+
+        <div className='formInput'>
+          <label>
+            Twitter
+            <Field name='twitterUrl' placeholder='Twitter URL' />
+          </label>
+        </div>
+
+        <div className='formInput'>
+          <label>
+            Facebook
+            <Field type='text' name='instagramURL' placeholder='Instagram URL' />
+          </label>
+        </div>
+      </div>
+      <div className='formInput'>
+        <label>
+          <Field type='checkbox' name='termsAndConditions' />
+          I accept the terms and conditions
+      </label>
+      </div>
+      <button
+        type='submit'
+        disabled={isSubmitting}>
+        Sign Up</button>
+    </Form>
+  )
+
+const SignUpForm = withFormik({
+  mapPropsToValues() {
+    return {
+      userGivenName: '',
+      userFamilyName: '',
+      userEmail: '',
+      userPassword: '',
+      userPasswordConfirm: '',
+      userDescription: '',
+      userRol: 'independent',
+      userCompany: 'noCompany',
+      officePhone: '',
+      mobilePhone: '',
+      skypeId: '',
+      facebookURL: '',
+      twitterUrl: '',
+      instagramURL: '',
+      termsAndConditions: false
+    }
+  },
+  validationSchema: Yup.object().shape({
+    userGivenName: Yup.string()
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    userFamilyName: Yup.string()
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!'),
+    //.required('Required'),
+    userEmail: Yup.string()
+      .email('Invalid email'),
+    //  .required('Required'),
+    userPassword: Yup.string().required('Password is required'),
+    userPasswordConfirm: Yup.string()
+      .oneOf([Yup.ref('userPassword'), null], "Passwords must match")
+      .required('Password confirm is required')
+  }),
+  handleSubmit(values, { props, setSubmitting, resetForm }) {
+    props.signUpUser(values)
+    resetForm()
+  }
+
+})(SignUpFormComponent)
+
+const mapDispatchToProps = { signUpUser }
+
+export default connect(null, mapDispatchToProps)(SignUpForm)
