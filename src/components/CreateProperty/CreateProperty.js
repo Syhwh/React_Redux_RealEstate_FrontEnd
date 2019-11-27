@@ -49,10 +49,10 @@ export function CreatePropertyForm({ error, createProperty }) {
       {({ isSubmitting, values, setFieldValue }) => {
         return (<>
           <div className='container'>
-            <Form >
-              <h1>Listing a New Property</h1>
-              <div className='row '>
-                <div className='col-md-12 col-sm-12  '>
+            <div className='row '>
+              <div className='col-md-12 col-sm-12 offset-3 '>
+                <Form >
+                  <h1>Listing a New Property</h1>
                   <section>
                     <header><h2>Basic Information</h2></header>
                     <div className='col-md-6'>
@@ -166,17 +166,17 @@ export function CreatePropertyForm({ error, createProperty }) {
                     <div className='col-md-6 col-sm-6'>
                       <h1>Property Details</h1>
                       <div className='form-group'>
-                        <label htmlFor='area' >area</label>
+                        <label htmlFor='area' >Area</label>
                         <Field name='area' placeholder='m2' className='form-control' />
                         <ErrorMessage name='area' />
                       </div>
                       <div className='form-group'>
-                        <label htmlFor='rooms' >rooms</label>
+                        <label htmlFor='rooms' >Rooms</label>
                         <Field name='rooms' placeholder='Number of rooms' className='form-control' />
                         <ErrorMessage name='rooms' />
                       </div>
                       <div className='form-group'>
-                        <label htmlFor='bedrooms' >bedrooms</label>
+                        <label htmlFor='bedrooms' >Bedrooms</label>
                         <Field
                           name='bedrooms'
                           placeholder='Number of bedrooms'
@@ -184,7 +184,7 @@ export function CreatePropertyForm({ error, createProperty }) {
                         <ErrorMessage name='bedrooms' />
                       </div>
                       <div className='form-group'>
-                        <label htmlFor='bathrooms' >bathrooms</label>
+                        <label htmlFor='bathrooms' >Bathrooms</label>
                         <Field
                           name='bathrooms'
                           placeholder='Number of bathrooms'
@@ -192,7 +192,7 @@ export function CreatePropertyForm({ error, createProperty }) {
                         <ErrorMessage name='bathrooms' />
                       </div>
                       <div className='form-group'>
-                        <label htmlFor='garages' >garages</label>
+                        <label htmlFor='garages' >Garages</label>
                         <Field
                           name='garages'
                           placeholder='Number of garages'
@@ -202,26 +202,27 @@ export function CreatePropertyForm({ error, createProperty }) {
                     </div>
                   </section>
                   <div><h2>Ammenities</h2></div>
-                  <div><Ammenities
+                  <div className='col-md-6'>
+                    <Ammenities
                     ammenities={values.ammenities}
                     setFieldValue={setFieldValue} />
                   </div>
-                  <div>
+                  <div className='col-md-6'>
                     <h1 className="text-center">Drag and Drop Pictures</h1>
                     <Dropzone
                       className='form-control'
                       onChangeStatus={handleChangeStatus}
                       accept="image/*" />
                   </div>
-                  <div >
-                    <button 
-                    className='btn btn-primary'
-                    type='submit' disabled={isSubmitting}>
-                       Create Property </button>
+                  <div className='offset-2 mt-3'>
+                    <button
+                      className='btn btn-primary'
+                      type='submit' disabled={isSubmitting}>
+                      Create Property </button>
                   </div>
-                </div>
+                </Form>
               </div>
-            </Form>
+            </div>
           </div>
         </>);
       }}

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AuthProvider } from './utils/AuthContext';
 import { PrivateRoute } from './components/NavigationComponent/PrivateRoute';
 import { NavigationComponent } from './components/NavigationComponent';
-import { Home } from './components/HomeComponent'
+import Home from './components/HomeComponent'
 import { CreateAccount } from './components/CreateAccount';
 import { NewProperty } from './components/CreateProperty';
 import { LoginComponent } from './components/LoginComponent';

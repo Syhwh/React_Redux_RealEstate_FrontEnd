@@ -4,14 +4,13 @@ import { getPropertyDetails } from '../../redux/actions/propertyActions';
 import { PropertyDetailsPage } from './PropertyDetailsPage';
 import './Style.css'
 import { Footer } from '../Footer';
+import Loading from '../NavigationComponent/LoadingComponent';
 function PropertyDetails({
   location,
   loading,
   property,
   getPropertyDetails }) {
 
-  console.log('loading: ', loading)
-  console.log('property: ', property)
 
   useEffect(() => {
     if (location.state) {
@@ -20,7 +19,7 @@ function PropertyDetails({
       getPropertyDetails(id);
     }
   }, []);
-  if (!property) return <p>Loading</p>
+  if (!property) return <Loading />
 
   return (<>
     <PropertyDetailsPage
@@ -37,7 +36,7 @@ function PropertyDetails({
       vendor={property.propertyUser}
       amenities={property.propertyAmmenities}
     />
-   
+    <Footer />
   </>
   )
 }

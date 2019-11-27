@@ -3,6 +3,7 @@ import { PropertyListCard } from './PropertyListCard';
 import { connect } from 'react-redux';
 import { propertyList } from '../../redux/actions/propertyActions';
 import { Container, Row, CardDeck } from 'react-bootstrap';
+import Loading from '../NavigationComponent/LoadingComponent';
 
 export function PropertyListPage({ properties, loading, propertyList }) {
   console.log(properties)
@@ -10,11 +11,11 @@ export function PropertyListPage({ properties, loading, propertyList }) {
     propertyList();
   }, []);
 
-  if (loading) return <p>Loading</p>
+  if (loading) return <Loading/>
   return (
     <>
       <Container>
-        <h1>Card</h1>
+        <h1>Featured Properties</h1>
         <Row>
 
           {properties.length > 0 && properties.map((

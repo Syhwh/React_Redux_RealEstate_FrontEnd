@@ -3,13 +3,13 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { MapCard } from './MapCard';
 function MapComponent(props) {
   const [state, setState] = useState({})
-  const { lat, lng, title, zoom } = props
+  const { lat, lng, title, zoom, image, info, location, address } = props
   const mapStyles = {
     width: '100%',
-    height: '100%',
+    height: '80%',
   };
 
-  function onMarkerClick(props, marker, e) {
+  function onMarkerClick(props, marker) {
     setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -22,6 +22,8 @@ function MapComponent(props) {
       zoom={zoom}
       style={mapStyles}
       initialCenter={{ lat: lat.toString(), lng: lng.toString() }}
+      center={{ lat: lat.toString(), lng: lng.toString() }}
+
     >
 
       <Marker
@@ -29,16 +31,19 @@ function MapComponent(props) {
         title={title || ''}
         name={title}
         position={{ lat: lat.toString(), lng: lng.toString() }} />
-      {/* <Marker
-        name={'Dolores park'}
-        position={{ lat: 37.759703, lng: -122.428093 }} />
-      <Marker /> */}
+
       <InfoWindow
         marker={state.activeMarker}
         visible={true}
       >
         <div>
-          <MapCard />
+          <MapCard
+            title={title}
+            image={image}
+            info={info}
+            address={address}
+            location={location}
+          />
         </div>
       </InfoWindow>
     </Map>

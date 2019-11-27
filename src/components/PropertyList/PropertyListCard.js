@@ -26,7 +26,7 @@ export function PropertyListCard({
       <div className="col-xl-4 col-md-6 col-sm-12">
       <div className="single-property-box">
         <div className="property-item">
-          <a className="property-img" href="single-listing-two.html">
+          <a className="property-img" >
             <img src={image} alt="#" />
           </a>
           <ul className="feature_text">
