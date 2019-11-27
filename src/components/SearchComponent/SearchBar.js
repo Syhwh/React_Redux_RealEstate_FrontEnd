@@ -46,7 +46,7 @@ function SearchBar({ propertySearch }) {
                   state={values.state} />
                 <div className="col-xl-3 col-lg-6 col-sm-12 pl-0">
                   <div className="submit_btn">
-                    <button className="btn v3" type="submit" disabled={isSubmitting} >Search</button>
+                    <button className="btn btn-primary" type="submit" disabled={isSubmitting} >Search</button>
                   <div className="dropdown-filter"><span>Advanced Search </span>
                   </div>
 

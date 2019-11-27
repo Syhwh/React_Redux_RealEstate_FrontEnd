@@ -14,7 +14,7 @@ const loginSchema = Yup.object().shape({
   typeAccount: Yup.string().required('You must select an Account Type'),
   userEmail: Yup.string()
     .email('Invalid email')
-    .required('Required'),
+    .required('A valid email is required'),
   userPassword: Yup.string().required('Password is required'),
 });
 
@@ -49,14 +49,20 @@ function UserLoginForm({ error, loginUser, loginAgency }) {
         return (
           <div className='container'>
             <div className='row'>
-              <div className='offset-3 col-md-6'>
+              <div className='mt-4 offset-3 col-md-6'>
                 <h2>User Login</h2>
                 <Form >
-                  <div>
-
+                  <div className="form-group">
                     <div> <ErrorMessage name='typeAccount' /></div>
+
                     <label className='mr-2' htmlFor='agent' > Invidividual</label>
-                    <Field type="radio" name='typeAccount' value='agent' />
+                    <Field
+                      type="radio"
+                      name='typeAccount'
+                      value='agent'
+                    />
+
+
 
                     <label className='mr-2' htmlFor='agency' > Agency</label>
                     <Field type="radio" name='typeAccount' value='angency' />

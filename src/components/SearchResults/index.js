@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { PropertyResultCard } from './PropertyResultCard';
 import { NotFound } from './NotFound';
-import  Loading  from '../NavigationComponent/LoadingComponent';
+import Loading from '../NavigationComponent/LoadingComponent';
 import { Footer } from '../Footer';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Breadcrumb } from 'react-bootstrap';
 function SearchResults({ propertyList, loading }) {
   console.log(propertyList)
   useEffect(() => {
@@ -12,11 +12,20 @@ function SearchResults({ propertyList, loading }) {
 
   }, []);
 
-  if (loading) return <Loading/>
+  if (loading) return <Loading />
 
   return (<>
     <Container>
+      <Row className='mt-2 offset-3'>
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+          <Breadcrumb.Item active>Search</Breadcrumb.Item>
+        </Breadcrumb>
+      </Row>
       <Row>
+        <div className='mt-2'>
+          <h2>Search Results</h2>
+        </div>
         {propertyList.length > 0 ? propertyList.map((
           { _id,
             propertyTitle,
@@ -29,7 +38,6 @@ function SearchResults({ propertyList, loading }) {
             propertyType,
           }
         ) => (<>
-          <h2>Search Results</h2>
           <PropertyResultCard
             key={_id}
             id={_id}
@@ -50,7 +58,7 @@ function SearchResults({ propertyList, loading }) {
         </>)) : <NotFound />}
       </Row>
     </Container>
-<Footer/>    
+    <Footer />
   </>)
 }
 

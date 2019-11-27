@@ -1,6 +1,7 @@
 import React from 'react';
 import { Gallery } from './Gallery';
 import MapComponent from '../MapComponent';
+import { Container, Row, Breadcrumb } from 'react-bootstrap';
 export function PropertyDetailsPage({
   title,
   price,
@@ -17,6 +18,12 @@ export function PropertyDetailsPage({
   return (
     <>
       <div className='container'>
+        <Row className='mt-2 offset-3'>
+          <Breadcrumb>
+            <Breadcrumb.Item class="breadcrumb-item" href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item class="breadcrumb-item" active>Details</Breadcrumb.Item>
+          </Breadcrumb>
+        </Row>
         <div className='row' >
           <div className='col-md-12 col-sm-12 mt-4 mb-4'>
             <header className="property-title">

@@ -8,6 +8,7 @@ import { BannerParallax } from './BannerParallax';
 import { Testimonials } from './Testimonials';
 import { BannerInfo } from './BannerInfo';
 import { Footer } from '../Footer';
+import { Container, Row, CardDeck } from 'react-bootstrap';
 import Loading from '../NavigationComponent/LoadingComponent';
 import './styles.css'
 
@@ -19,15 +20,18 @@ const Home = ({ properties, loading, propertyListFn }) => {
 
   if (loading) return <Loading />
   return (<>
+
     <SearchSection />
-    <div style={{ height: '550px' }}>
+    <div className='Home_map'>
       <HomeMapComponent
         properties={properties}
         lat={17.2976735}
         lng={-91.7516232}
         zoom={3} />
     </div>
-    <PropertyList />
+    <Container>
+      <PropertyList />
+    </Container>
     <BannerParallax />
     <Testimonials />
     <BannerInfo />

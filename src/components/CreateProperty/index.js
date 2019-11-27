@@ -1,9 +1,10 @@
 import React from 'react';
-import  CreatePropertyForm  from './CreateProperty'
+import { CreatePropertyPage } from './CreatePropertyPage'
 import { Footer } from '../Footer';
-export const NewProperty = () => {
+
+export function NewProperty() {
   return (<>
-  <CreatePropertyForm />
- <Footer/>
- </> )
+    <CreatePropertyPage />
+    <Footer />
+  </>)
 }

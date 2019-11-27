@@ -40,7 +40,7 @@ function SignUpForm({ error, signUpUser, signUpAgency }) {
       }}
       validationSchema={loginSchema}
       onSubmit={(values, { resetForm, setSubmitting }) => {
-        values.typeAccount === 'angency' ? signUpAgency(values) :signUpUser(values);
+        values.typeAccount === 'angency' ? signUpAgency(values) : signUpUser(values);
         resetForm();
         setSubmitting(false);
         history.push('/login');
@@ -51,23 +51,23 @@ function SignUpForm({ error, signUpUser, signUpAgency }) {
           <>
             <div className='container'>
               <div className='row'>
-                <div className='offset-3 col-md-6'>
+                <div className=' mt-4 offset-3 col-md-6'>
                   <h2>User Register</h2>
                   <Form >
                     <div>
-                      <div> <ErrorMessage className='errorMessage' name='typeAccount' /></div>
-                      <label htmlFor='regular'>Regular   </label>
+                      <div> <ErrorMessage className=' has-danger' name='typeAccount' /></div>
+                      <label className='mr-2' htmlFor='regular'>Regular   </label>
                       <Field type="radio" name='typeAccount' value='regular' />
-                      <label htmlFor='agent' > Agent</label>
+                      <label className='mr-2' htmlFor='agent' > Agent</label>
                       <Field type="radio" name='typeAccount' value='agent' />
-                      <label htmlFor='agency' > Agency</label>
+                      <label className='mr-2' htmlFor='agency' > Agency</label>
                       <Field type="radio" name='typeAccount' value='angency' />
                     </div>
                     {/* {values.typeAccount === 'angency' ? <p>Agency list</p> : null} */}
                     <div className=' form-group'>
                       <label htmlFor='userEmail' >Email</label>
                       <Field type="email" name='userEmail' placeholder='Email' className='form-control' />
-                      <ErrorMessage className='errorMessage' name='userEmail' />
+                      <ErrorMessage className=' has-danger' name='userEmail' />
                       <FormB.Text className="text-muted">
                         <p>
                           We'll never share your email with anyone else.

@@ -22,10 +22,7 @@ function MapComponent(props) {
       zoom={zoom}
       style={mapStyles}
       initialCenter={{ lat: lat.toString(), lng: lng.toString() }}
-      center={{ lat: lat.toString(), lng: lng.toString() }}
-
-    >
-
+      center={{ lat: lat.toString(), lng: lng.toString() }}>
       <Marker
         onClick={onMarkerClick}
         title={title || ''}
