@@ -5,7 +5,7 @@ import { AuthContext } from '../../utils/AuthContext';
 import { logOutUser } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
 import { getUser } from '../../redux/actions/userActions';
-import { Nav, NavDropdown, NavItem } from 'react-bootstrap';
+import { Nav, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCog, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,7 +16,7 @@ function SecondaryNavigation({ logOutUser, userInfo }) {
 
   useEffect(() => {
     getUser(user);
-  }, []);
+  }, [user]);
 
   const redirectToHome = () => {
     authLogOutUser();
