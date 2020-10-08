@@ -9,7 +9,7 @@ function UserProfile({ id, getUser, userInfo }) {
   const { user } = useContext(AuthContext);
   useEffect(() => {
     getUser(id);
-    console.log(userInfo)
+
   }, []);
 
   return (<>

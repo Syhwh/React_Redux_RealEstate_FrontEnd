@@ -6,7 +6,7 @@ import { listProperty } from '../../redux/actions/propertyActions';
 function ShowProperties({ listProperty }) {
   useEffect(() => {
     console.log('did mount show')
-    // listProperty()
+     listProperty()
   }, []);
 
   return (<>

@@ -15,7 +15,7 @@ function PropertyDetails({
   useEffect(() => {
     if (location.state) {
       const { id } = location.state;
-      console.log('id: ', id)
+
       getPropertyDetails(id);
     }
   }, []);

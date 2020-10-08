@@ -14,8 +14,7 @@ import {
 
 export function createProperty(propertyData) {
   return function (dispatch) {
-    console.log('propertyData')
-    console.log(propertyData)
+
     const token = localStorage.getItem('token');
     ApiRE.post('/property', propertyData, {
       headers: {
@@ -117,7 +116,6 @@ export function propertySearch(params) {
   return function (dispatch) {
     ApiRE.get(`/search`, { params })
       .then(({ data }) => {
-        console.log(data)
         dispatch({
           type: PROPERTY_SEARCH,
           payload: data.searchResult,

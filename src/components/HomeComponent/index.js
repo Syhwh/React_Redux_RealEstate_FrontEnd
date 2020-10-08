@@ -13,7 +13,7 @@ import Loading from '../NavigationComponent/LoadingComponent';
 import './styles.css'
 
 const Home = ({ properties, loading, propertyListFn }) => {
-  console.log(properties)
+
   useEffect(() => {
     propertyListFn();
   }, []);

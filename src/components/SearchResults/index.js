@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { PropertyResultCard } from './PropertyResultCard';
 import { NotFound } from './NotFound';
@@ -6,11 +6,7 @@ import Loading from '../NavigationComponent/LoadingComponent';
 import { Footer } from '../Footer';
 import { Container, Row, Breadcrumb } from 'react-bootstrap';
 function SearchResults({ propertyList, loading }) {
-  console.log(propertyList)
-  useEffect(() => {
 
-
-  }, []);
 
   if (loading) return <Loading />
 

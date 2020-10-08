@@ -11,13 +11,11 @@ import { faUserCog, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons
 
 
 function SecondaryNavigation({ logOutUser, userInfo }) {
-  console.log('userInfo')
-  console.log(userInfo)
+
   const { user, authLogOutUser } = useContext(AuthContext);
 
   useEffect(() => {
     getUser(user);
-
   }, []);
 
   const redirectToHome = () => {

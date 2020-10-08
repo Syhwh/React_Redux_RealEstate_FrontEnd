@@ -22,7 +22,7 @@ function HomeMapComponent(props) {
       activeProperty: property
     });
   }
-  console.log(state.selectedPlace)
+
   return (
     <Map
       google={props.google}

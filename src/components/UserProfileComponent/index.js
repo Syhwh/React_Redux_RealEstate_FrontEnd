@@ -5,8 +5,6 @@ import UserProfile from './UserProfile';
 
 
 function Profile({ user }) {
-  console.log('user in profile')
-  console.log(user)
 
   if (!user.profileComplete) return <Redirect to='/profile/edit' />
 

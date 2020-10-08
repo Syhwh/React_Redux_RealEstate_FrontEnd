@@ -7,15 +7,15 @@ import { Container, Row, CardDeck } from 'react-bootstrap';
 import Loading from '../NavigationComponent/LoadingComponent';
 
 export function PropertyListPage({ properties, loading, propertyList }) {
-  console.log(properties)
+
   useEffect(() => {
     propertyList();
   }, []);
 
   if (loading) return <Loading />
   return (
-    <>
-      <h1>Featured Properties</h1>
+    <Container style={{marginTop: '1.75rem'}}>
+        <h1>Featured Properties</h1>
       <Row>
         {properties.length > 0 && properties.map((
           { _id,
@@ -49,7 +49,7 @@ export function PropertyListPage({ properties, loading, propertyList }) {
             />
           ))}
       </Row>
-    </>
+    </Container>
   )
 }
 const mapStateToProps = (store) => {

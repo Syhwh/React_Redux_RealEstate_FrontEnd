@@ -39,8 +39,7 @@ const profileSchema = Yup.object().shape({
 });
 
 function EditProfileForm({ editUser, userInfo }) {
-  console.log('userInfo in edit profile')
-  console.log(userInfo)
+
   const { user } = useContext(AuthContext);
   const [images, setImages] = useState('');
 
@@ -215,7 +214,6 @@ function EditProfileForm({ editUser, userInfo }) {
               </div>
             </Form>
           </div>
-
         );
       }}
     </Formik >
