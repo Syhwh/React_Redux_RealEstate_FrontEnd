@@ -1,6 +1,6 @@
 import axios from 'axios';
 const ApiRE = axios.create({
-  baseURL: process.env.REACT_APP_API_URL||'http://swgb-realestatebackend.herokuapp.com/',
+  baseURL: process.env.REACT_APP_API_URL||'http://localhost:3001',
   timeout: 60000
 })
 
